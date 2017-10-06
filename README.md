@@ -1,4 +1,4 @@
-# TensorFlow-Char-RNN
+﻿# TensorFlow-Char-RNN
 A TensorFlow implementation of Andrej Karpathy's [Char-RNN](https://github.com/karpathy/char-rnn), a character level language model using multilayer Recurrent Neural Network (RNN, LSTM or GRU). See his article [The Unreasonable Effectiveness of Recurrent Neural Network](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) to learn more about this model. 
 
 # Installation
@@ -77,3 +77,16 @@ To see the list of all hyperparameters, run:
 ```bash
 python train.py --help
 ```
+## Dataset preparation (Windows only)
+In order to help feed the RNN with data there are 2 batch scripts to help with data extraction in the `windows_data_prep_scripts` folder.
+
+* `extract_sourcefiles.bat` recursively extracts all relevant files from a given parent folder and copies them to a specified output folder.
+* `flatten.bat` recursively parses all lines from relevant files in a given folder and appends them to a specified output file.
+
+#### Example
+```winbatch
+extract_sourcefiles.bat "c:\Projects\core" "output" "*.cs" "obj Properties"
+flatten.bat "output" "dataset.txt" "*.cs"
+```
+
+This could yield a file not in UTF-8 encoding; either convert or specify encoding (e.g. ANSI) when feeding this file to `train.py`. Now you're ready to train a model to generate C# code in the flavor of your codebase!
